@@ -1,20 +1,14 @@
 # VRP SDK
 
-VRP SDK provides integration tools for systems that interact with the VRP protocol.
+Integration toolkit for the VRP protocol.  
+Provides API clients, helpers, and examples for connecting external systems to VRP Core.
 
-It includes:
-- API clients for communicating with VRP Admin and VRP Core
-- helper functions for session management
-- example integrations
-- mock components for testing
+## Structure
 
-This SDK does not contain protocol logic.  
-It serves as a bridge between external applications and the VRP ecosystem.
+- `clients/` — language-specific SDKs (Go, Rust, Python)
+- `examples/` — mock sessions and integration flows
+- `docs/` — guides and specifications
 
-Suitable for:
-- enterprise integrations
-- backend services
-- client applications
-- testing environments
+## Status
 
-Source code is being prepared for structured release.
+Source code is being prepared for structured release as the integration layer stabilizes. release.
