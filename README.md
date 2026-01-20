@@ -16,3 +16,5 @@ Suitable for:
 - backend services
 - client applications
 - testing environments
+
+Source code is being prepared for structured release.
