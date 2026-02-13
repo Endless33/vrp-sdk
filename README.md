@@ -11,9 +11,9 @@ This repository is a **preview SDK layer** — not a routing core and not a prod
 
 ## What This SDK Is
 
-- A **contract layer**: event schemas + integration patterns
-- A **client layer**: lightweight consumers for event streams (staged)
-- A **reference layer**: examples for interpreting VRP behavior
+- A **contract layer** — event schemas and integration boundaries
+- A **client layer** — lightweight event consumers (preview)
+- A **reference layer** — examples for interpreting VRP behavior
 
 ---
 
@@ -23,52 +23,111 @@ This repository is a **preview SDK layer** — not a routing core and not a prod
 - Not a cryptographic implementation
 - Not a production-ready networking library
 - Not a performance benchmark suite
+- Not a finished API surface
+
+This is a contract-first preview.
 
 ---
 
 ## Repository Structure
 
-. ├── docs/ │   └── event-schema.md           # canonical event contract (preview) ├── sdk/ │   └── client.py                 # minimal reference client (preview) ├── examples/                     # staged examples (optional) └── README.md
+. ├── docs/ │   ├── event-schema.md          # canonical event contract (preview) │   └── integration-example.md   # example integration pattern ├── sdk/ │   └── client.py                # minimal reference client (preview) ├── examples/ │   └── basic_consumer.py        # usage example └── README.md
 
 ---
 
 ## Architecture (Conceptual)
 
-The SDK is organized into three layers:
+The SDK is organized into three conceptual layers:
 
-- **Clients** — language-specific integration modules (planned/staged)
-- **Docs** — integration contracts and schema definitions
-- **Examples** — reference flows for consuming event streams (staged)
+### 1. Contract Layer
+Defines the observable event schema:
+- Event envelope
+- Event types
+- State transitions
+- Hard invariants
 
-This mirrors how external systems would integrate with a VRP Core:
-they do not need core internals — only a stable contract.
+See:
+- `docs/event-schema.md`
+
+### 2. Client Layer
+Implements a minimal reference consumer:
+- JSONL stream ingestion
+- Deterministic state tracking
+- Invariant checks
+
+See:
+- `sdk/client.py`
+
+### 3. Example Layer
+Demonstrates how external systems might:
+- Subscribe to event streams
+- Track session continuity
+- Export metrics to observability systems
+
+See:
+- `examples/basic_consumer.py`
 
 ---
 
 ## Current Status
 
-The SDK is in **architectural preparation**.
+This SDK is in **architectural preparation**.
 
-Current included artifacts aim to provide:
+It currently provides:
 
-- a stable event schema contract
-- a minimal reference client
-- clear integration boundaries
+- A stable event schema contract
+- A minimal Python reference client
+- Example consumer logic
 
-As the contract stabilizes, language clients and examples can evolve.
+It does not yet provide:
+
+- Production network bindings
+- Language-specific full SDKs
+- Performance guarantees
 
 ---
 
 ## Roadmap (Staged)
 
-- Event schema contract (docs) — baseline and versioned evolution
-- Minimal reference client (Python) — JSONL / WebSocket consumption model
-- Example flows — session creation, mutation ticks, path selection events
-- Go client (planned) — stream consumer + typed events
-- Rust client (planned) — async consumer + utilities
+- Formalize event schema versioning
+- Add sample event streams
+- Expand Python client (WebSocket support)
+- Go client (typed event consumer)
+- Rust async client
+- Typed metrics export layer
 
-No timelines are promised in this repository.
-This is a contract-first preview.
+No release timelines are promised in this preview repository.
+
+---
+
+## Design Philosophy
+
+VRP treats volatility as a modeled state, not an exception.
+
+The SDK therefore exposes:
+
+- Explicit state transitions
+- Deterministic event semantics
+- Session-stable identity handling
+- Bounded adaptation behavior
+
+The SDK is intentionally minimal.
+Clarity over abstraction.
+
+---
+
+## Ecosystem
+
+VRP and Jumping VPN are documented across three repositories:
+
+- Jumping VPN (architecture + PoCs):  
+  https://github.com/Endless33/jumping-vpn-preview
+
+- VRP Demo (behavioral event stream):  
+  https://github.com/Endless33/vrp-demo
+
+- VRP SDK (this repository):  
+  https://github.com/Endless33/vrp-sdk
 
 ---
 
@@ -78,11 +137,5 @@ License terms are not finalized for this preview repository.
 
 ---
 
-## Related Repositories
-
-- Jumping VPN (architectural preview):  
-  https://github.com/Endless33/jumping-vpn-preview
-
-- VRP Demo (behavioral event stream):  
-  https://github.com/Endless33/vrp-demo
-```0
+Session is the anchor.  
+Transport is volatile.
